@@ -19,7 +19,7 @@ public class UserService {
     }
 
     // 모든 유저 조회
-    public List<UserResponseDto> getAllUsers() {
+    public List<UserResponseDto> getAllUser() {
         return userRepository.findAll().stream()
                 .map(user -> UserResponseDto.builder()
                         .id(user.getId())
@@ -79,5 +79,4 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
-
 }
