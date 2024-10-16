@@ -13,4 +13,9 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+    // 모든 유저 조회
+    // 특정 유저 조회
+    // 유저 생성 -> 인증 인가 로 넘어갈까? 그게 맞겠지?
+    // 유저 삭제
+
 }

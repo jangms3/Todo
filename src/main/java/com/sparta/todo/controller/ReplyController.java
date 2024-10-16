@@ -12,4 +12,6 @@ public class ReplyController {
     public ReplyController(ReplyService replyService) {
         this.replyService = replyService;
     }
+    // 특정 할 일에 달린 모든 댓글 조회
+    // 댓글 생성.
 }
