@@ -1,7 +1,10 @@
 package com.sparta.todo.service;
 
+import com.sparta.todo.entity.Todo;
 import com.sparta.todo.repository.TodoRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TodoService {
@@ -10,6 +13,9 @@ public class TodoService {
 
     public TodoService(TodoRepository todoRepository) {
         this.todoRepository =todoRepository;
+    }
+    public List<Todo> getAllTodo(){
+        return todoRepository.findAll();
     }
 
 }
