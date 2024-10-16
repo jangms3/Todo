@@ -25,7 +25,7 @@ public class ReplyService {
         this.userRepository = userRepository;
     }
     // 특정 일정에 달린 댓글 목록 조회 관련 서비스
-    public List<ReplyResponseDto> getRepliesByTodoId(Long todoId) {
+    public List<ReplyResponseDto> getReplyByTodoId(Long todoId) {
         return replyRepository.findByTodoId(todoId).stream()
                 .map(reply -> ReplyResponseDto.builder()
                         .id(reply.getId())
@@ -56,10 +56,10 @@ public class ReplyService {
     // 댓글 생성
     public ReplyResponseDto createReply(Long todoId, ReplyRequestDto requestDto) {
         Todo todo = todoRepository.findById(todoId)
-                .orElseThrow(() -> new RuntimeException("Todo not found"));
+                .orElseThrow(() -> new RuntimeException("일정을 찾을 수 없습니다."));
 
         User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
         Reply reply = new Reply();
         reply.setContent(requestDto.getContent());
@@ -79,10 +79,10 @@ public class ReplyService {
     // 댓글 수정
     public ReplyResponseDto updateReply(Long todoId, Long replyId, ReplyRequestDto requestDto) {
         Reply reply = replyRepository.findById(replyId)
-                .orElseThrow(() -> new RuntimeException("Reply not found"));
+                .orElseThrow(() -> new RuntimeException("일정이 없습니다."));
 
         if (!reply.getTodo().getId().equals(todoId)) {
-            throw new RuntimeException("Reply does not belong to this todo");
+            throw new RuntimeException("댓글이 일정에 속하지 않습니다.");
         }
 
         reply.setContent(requestDto.getContent());
@@ -98,14 +98,19 @@ public class ReplyService {
                 .build();
     }
     // 댓글 삭제
-    public void deleteReply(Long todoId, Long replyId) {
+    public void deleteReply(Long todoId, Long replyId, Long userId) {
+        // 1. 댓글이 존재하는지 확인해보기
         Reply reply = replyRepository.findById(replyId)
-                .orElseThrow(() -> new RuntimeException("Reply not found"));
-
+                .orElseThrow(() -> new RuntimeException("해당 댓글이 없습니다."));
+        // 2. 댓글이 해당 일정에 속하는지 확인해보기
         if (!reply.getTodo().getId().equals(todoId)) {
-            throw new RuntimeException("Reply does not belong to this todo");
+            throw new RuntimeException("댓글이 해당 일정에 속해 있지 않습니다.");
         }
-
+        // 3. 댓글이 해당 작성자와 같은지 확인해보기
+        if (!reply.getUser().getId().equals(userId)) {
+            throw new RuntimeException ("해당 댓글을 삭제할 권한이 없습니다.");
+        }
+        // 4. 유효성 검증이 완료되면 댓글 삭제
         replyRepository.delete(reply);
     }
 }

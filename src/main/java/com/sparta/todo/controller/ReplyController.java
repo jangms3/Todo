@@ -37,8 +37,8 @@ public class ReplyController {
     }
     // 댓글 삭제
     @DeleteMapping("/{replyId}")
-    public void deleteReply(@PathVariable Long todoId, @PathVariable Long replyId) {
-        replyService.deleteReply(todoId, replyId);
+    public void deleteReply(@PathVariable Long todoId, @PathVariable Long replyId, @RequestParam Long userId) {
+        replyService.deleteReply(todoId, replyId, userId);
     }
 
 }
