@@ -56,7 +56,7 @@ public class UserService {
     }
 
     // 유저 수정
-    public UserResponseDto updateUser(Long id, UserRequestDto userRequestDto) {
+    public UserResponseDto updateUserid(Long id, UserRequestDto userRequestDto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -79,4 +79,5 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
 }
