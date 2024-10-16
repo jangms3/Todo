@@ -21,11 +21,14 @@ public class Todo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-
     private User user;
 
     private String title;
     private String content;
+
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Reply> reply;
+
 
     @CreationTimestamp
     private LocalDateTime createdAt;
