@@ -1,10 +1,9 @@
 package com.sparta.todo.controller;
 
+import com.sparta.todo.dto.UserRequestDto;
 import com.sparta.todo.dto.UserResponseDto;
 import com.sparta.todo.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,11 +16,29 @@ public class UserController {
         this.userService = userService;
     }
     // 모든 유저 조회
-
+    @GetMapping
+    public List<UserResponseDto> getAllUsers() {
+        return userService.getAllUser();
+    }
     // 특정 유저 조회
-
-    // 유저 생성 -> 인증 인가 로 넘어갈까? 그게 맞겠지?
-
+    @GetMapping("/{id}")
+    public UserResponseDto getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
+    }
+    // 유저 생성
+    @PostMapping
+    public UserResponseDto createUser(@RequestBody UserRequestDto userRequestDto) {
+        return userService.createUser(userRequestDto);
+    }
+    // 유저 수정
+    @PutMapping("/{id}")
+    public UserResponseDto updateUser(@PathVariable Long id, @RequestBody UserRequestDto userRequestDto) {
+        return userService.updateUserid(id, userRequestDto);
+    }
     // 유저 삭제
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+    }
 
 }
