@@ -1,4 +1,4 @@
-package com.sparta.todo.config;
-
-public class WebSecurityConfig {
-}
+//package com.sparta.todo.config;
+//
+//public class WebSecurityConfig {
+//}

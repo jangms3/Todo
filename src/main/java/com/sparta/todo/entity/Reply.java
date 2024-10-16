@@ -27,24 +27,4 @@ public class Reply {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
 }

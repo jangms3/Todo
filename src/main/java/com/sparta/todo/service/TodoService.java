@@ -54,7 +54,7 @@ public class TodoService {
     public TodoResponseDto createTodo(TodoRequestDto  todoRequestDto) {
         // 1. 요청에서 유저 ID를 가져와 유저를 조회
         User user = userRepository.findById(todoRequestDto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("유저가 없습니다."));
 
         // 2. 새로운 Todo 엔티티 생성
         Todo todo = new Todo();
