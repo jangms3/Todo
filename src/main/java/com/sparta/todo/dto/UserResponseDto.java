@@ -1,6 +1,4 @@
 package com.sparta.todo.dto;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserResponseDto {

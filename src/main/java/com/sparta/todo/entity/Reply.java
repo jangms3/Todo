@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 
 import java.time.LocalDateTime;
 
@@ -21,16 +18,33 @@ public class Reply {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="todo_id")
+    @JoinColumn(name = "todo_id")
     private Todo todo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @CreationTimestamp
-    private LocalDateTime CreateAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    @UpdateTimestamp
-    private LocalDateTime UpdateAt;
+    public Long getId() {
+        return id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 }

@@ -19,7 +19,7 @@ public class TodoService {
         this.todoRepository =todoRepository;
         this.userRepository =userRepository;
     }
-    // 모든 일정 조회
+    // 모든 일정 조회 관련 서비스
     public Page<TodoResponseDto> getAllTodo(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
 
@@ -35,7 +35,7 @@ public class TodoService {
                 ));
     }
 
-                        // 특정 일정 조회
+    // 특정 일정 조회 관련 서비스
     public TodoResponseDto getTodoById(Long id) {
         Todo todo = todoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 일정이 없습니다."));
@@ -50,7 +50,7 @@ public class TodoService {
                 todo.getUpdatedAt()
         );
     }
-    // 2. 일정 생성
+    // 2. 일정 생성 관련 서비스
     public TodoResponseDto createTodo(TodoRequestDto  todoRequestDto) {
         // 1. 요청에서 유저 ID를 가져와 유저를 조회
         User user = userRepository.findById(todoRequestDto.getUserId())
@@ -76,7 +76,7 @@ public class TodoService {
                 savedTodo.getUpdatedAt()
         );
     }
-    // 일정 수정
+    // 일정 수정 관련 서비스
     public TodoResponseDto updateTodo(TodoRequestDto requestDTO) {
         User user = userRepository
                 .findById(requestDTO.getUserId()).orElseThrow(() -> new RuntimeException("유저가 없습니다"));
@@ -98,7 +98,7 @@ public class TodoService {
                 savedTodo.getUpdatedAt()
         );
     }
-    // 일정 삭제
+    // 일정 삭제 관련 서비스
     public void deleteTodo (Long id) {
         if(!todoRepository.existsById(id)) {
             throw new RuntimeException("해당 일정이 존재하지 않습니다");
