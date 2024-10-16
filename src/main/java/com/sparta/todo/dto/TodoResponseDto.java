@@ -1,7 +1,10 @@
 package com.sparta.todo.dto;
 
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 public class TodoResponseDto {
     private Long id;
     private String title;
