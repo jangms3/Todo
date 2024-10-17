@@ -5,7 +5,6 @@ todo -> 일정 관리 앱 devlop
         지연로딩 과 관계형 데이터베이스 구축 
 
         JWT를 활용한 로그인/회원가입 구현하기 x
-        
 
                                         일정 api
 ![일정 api](https://github.com/user-attachments/assets/e61dc863-60b6-413a-b347-14fbd4ccaa15)
