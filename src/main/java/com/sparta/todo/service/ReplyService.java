@@ -39,10 +39,10 @@ public class ReplyService {
     // 댓글 단건 조회
     public ReplyResponseDto getReplyById(Long todoId, Long replyId) {
         Reply reply = replyRepository.findById(replyId)
-                .orElseThrow(() -> new RuntimeException("Reply not found"));
+                .orElseThrow(() -> new RuntimeException("댓글이 존재하지 않습니다."));
 
         if (!reply.getTodo().getId().equals(todoId)) {
-            throw new RuntimeException("Reply does not belong to this todo");
+            throw new RuntimeException("댓글은 일정에 속하지 않습니다");
         }
 
         return ReplyResponseDto.builder()
