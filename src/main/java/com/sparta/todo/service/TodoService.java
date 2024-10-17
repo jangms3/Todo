@@ -1,4 +1,5 @@
 package com.sparta.todo.service;
+
 import com.sparta.todo.dto.TodoRequestDto;
 import com.sparta.todo.dto.TodoResponseDto;
 import com.sparta.todo.entity.Todo;
@@ -15,10 +16,11 @@ public class TodoService {
     private final TodoRepository todoRepository;
     private final UserRepository userRepository;
 
-    public TodoService(TodoRepository todoRepository,UserRepository userRepository) {
-        this.todoRepository =todoRepository;
-        this.userRepository =userRepository;
+    public TodoService(TodoRepository todoRepository, UserRepository userRepository) {
+        this.todoRepository = todoRepository;
+        this.userRepository = userRepository;
     }
+
     // 모든 일정 조회 관련 서비스
     public Page<TodoResponseDto> getAllTodo(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -50,8 +52,9 @@ public class TodoService {
                 todo.getUpdatedAt()
         );
     }
+
     // 2. 일정 생성 관련 서비스
-    public TodoResponseDto createTodo(TodoRequestDto  todoRequestDto) {
+    public TodoResponseDto createTodo(TodoRequestDto todoRequestDto) {
         // 1. 요청에서 유저 ID를 가져와 유저를 조회
         User user = userRepository.findById(todoRequestDto.getUserId())
                 .orElseThrow(() -> new RuntimeException("유저가 없습니다."));
@@ -76,6 +79,7 @@ public class TodoService {
                 savedTodo.getUpdatedAt()
         );
     }
+
     // 일정 수정 관련 서비스
     public TodoResponseDto updateTodo(TodoRequestDto requestDTO) {
         User user = userRepository
@@ -98,9 +102,10 @@ public class TodoService {
                 savedTodo.getUpdatedAt()
         );
     }
+
     // 일정 삭제 관련 서비스
-    public void deleteTodo (Long id) {
-        if(!todoRepository.existsById(id)) {
+    public void deleteTodo(Long id) {
+        if (!todoRepository.existsById(id)) {
             throw new RuntimeException("해당 일정이 존재하지 않습니다");
         }
         todoRepository.deleteById(id);

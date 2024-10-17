@@ -58,7 +58,7 @@ public class UserService {
     // 유저 수정
     public UserResponseDto updateUserid(Long id, UserRequestDto userRequestDto) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("해당 유저를 찾을 수 없습니다"));
 
         user.setUsername(userRequestDto.getUsername());
         user.setEmail(userRequestDto.getEmail());
@@ -75,7 +75,7 @@ public class UserService {
     // 유저 삭제
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found");
+            throw new RuntimeException("해당 유저를 찾을 수 없습니다");
         }
         userRepository.deleteById(id);
     }
