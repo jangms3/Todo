@@ -3,6 +3,7 @@ package com.sparta.todo.controller;
 import com.sparta.todo.dto.ReplyRequestDto;
 import com.sparta.todo.dto.ReplyResponseDto;
 import com.sparta.todo.service.ReplyService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +28,12 @@ public class ReplyController {
     }
     // 댓글 생성
     @PostMapping
-    public ReplyResponseDto createReply(@PathVariable Long todoId, @RequestBody ReplyRequestDto replyRequestDto) {
+    public ReplyResponseDto createReply(@PathVariable Long todoId, @RequestBody @Valid ReplyRequestDto replyRequestDto) {
         return replyService.createReply(todoId, replyRequestDto);
     }
     // 댓글 수정
     @PutMapping("/{replyId}")
-    public ReplyResponseDto updateReply(@PathVariable Long todoId, @PathVariable Long replyId, @RequestBody ReplyRequestDto replyRequestDto) {
+    public ReplyResponseDto updateReply(@PathVariable Long todoId, @PathVariable Long replyId, @RequestBody @Valid ReplyRequestDto replyRequestDto) {
         return replyService.updateReply(todoId, replyId, replyRequestDto);
     }
     // 댓글 삭제

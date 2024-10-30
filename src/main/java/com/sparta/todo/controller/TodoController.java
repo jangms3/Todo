@@ -4,6 +4,7 @@ package com.sparta.todo.controller;
 import com.sparta.todo.dto.TodoRequestDto;
 import com.sparta.todo.dto.TodoResponseDto;
 import com.sparta.todo.service.TodoService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,14 +30,14 @@ public class TodoController {
     }
     // 일정 생성
     @PostMapping
-    public TodoResponseDto createTodo(@RequestBody TodoRequestDto todoRequestDto) {
+    public TodoResponseDto createTodo(@RequestBody @Valid TodoRequestDto todoRequestDto) {
         return todoService.createTodo(todoRequestDto);
     }
     // 일정 수정
     @PutMapping("/{id}")
     public TodoResponseDto updateTodo(
             @PathVariable Long id,
-            @RequestBody TodoRequestDto todoRequestDto) {
+            @RequestBody @Valid TodoRequestDto todoRequestDto) {
         return todoService.updateTodo(todoRequestDto);
     }
     // 일정 삭제
