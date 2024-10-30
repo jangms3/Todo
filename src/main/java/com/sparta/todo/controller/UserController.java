@@ -10,14 +10,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
+
         this.userService = userService;
     }
     // 모든 유저 조회
     @GetMapping
     public List<UserResponseDto> getAllUsers() {
+
         return userService.getAllUser();
     }
     // 특정 유저 조회

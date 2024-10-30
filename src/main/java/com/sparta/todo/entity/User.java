@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 @Builder
 @NoArgsConstructor
@@ -30,6 +29,4 @@ public class User {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-
 }
