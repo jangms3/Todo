@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Todo {
@@ -28,6 +29,8 @@ public class Todo {
     @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Reply> reply;
 
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<UserTodo> userTodo;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
