@@ -4,21 +4,28 @@ import com.sparta.todo.dto.TodoRequestDto;
 import com.sparta.todo.dto.TodoResponseDto;
 import com.sparta.todo.entity.Todo;
 import com.sparta.todo.entity.User;
+import com.sparta.todo.entity.UserTodo;
 import com.sparta.todo.repository.TodoRepository;
 import com.sparta.todo.repository.UserRepository;
+import com.sparta.todo.repository.UserTodoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoService {
     // 생성자 주입 방식 -> Autowired 는 권장 x 한다고 했었음.
     private final TodoRepository todoRepository;
     private final UserRepository userRepository;
+    private final UserTodoRepository assignedUserRepository;
 
-    public TodoService(TodoRepository todoRepository, UserRepository userRepository) {
+    public TodoService(TodoRepository todoRepository, UserRepository userRepository, UserTodoRepository assignedUserRepository) {
         this.todoRepository = todoRepository;
         this.userRepository = userRepository;
+        this.assignedUserRepository = assignedUserRepository;
     }
 
     // 모든 일정 조회 관련 서비스
